@@ -1,0 +1,28 @@
+{
+  "name": "client",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "echo \"Client Tests\""
+  },
+  "dependencies": {
+    "next": "12.0.8",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "server": "*",
+    "ui": "*"
+  },
+  "devDependencies": {
+    "@types/node": "17.0.12",
+    "@types/react": "17.0.38",
+    "config": "*",
+    "eslint": "8.7.0",
+    "eslint-config-next": "12.0.8",
+    "tsconfig": "*",
+    "typescript": "4.5.5"
+  }
+}
