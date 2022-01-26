@@ -1,6 +1,7 @@
 import * as React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { Button } from 'ui';
 
 const Home: NextPage = () => (
   <div>
@@ -12,6 +13,8 @@ const Home: NextPage = () => (
 
     <main>
       <h1>Hello, world.</h1>
+
+      <Button onClick={() => console.log('hello')} />
     </main>
   </div>
 );

@@ -10,6 +10,7 @@ app.get('/', (_req, res) => {
     res.send('hello, world');
 });
 app.listen(port, () => {
+    // eslint-disable-next-line no-console
     console.log(`Server running at http://localhost::${port}`);
 });
 //# sourceMappingURL=index.js.map
