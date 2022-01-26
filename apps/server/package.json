@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "rm -rf dist && yarn build && nodemon ./dist/src/index.js",
     "build": "tsc",
-    "test": "echo \"Server Tests\""
+    "test": "echo \"Server Tests\"",
+    "lint": "eslint src --fix"
   },
   "dependencies": {
     "express": "^4.17.2"
