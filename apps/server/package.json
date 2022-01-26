@@ -2,10 +2,20 @@
   "name": "server",
   "version": "0.0.0",
   "private": true,
-  "scripts": {},
+  "scripts": {
+    "dev": "rm -rf dist && yarn build && nodemon ./dist/src/index.js",
+    "build": "tsc",
+    "test": "echo \"Server Tests\""
+  },
+  "dependencies": {
+    "express": "^4.17.2"
+  },
   "devDependencies": {
+    "@types/express": "^4.17.13",
     "@types/node": "^17.0.12",
+    "eslint": "^8.7.0",
     "nodemon": "^2.0.15",
+    "tsconfig": "*",
     "typescript": "^4.5.5"
   }
 }
