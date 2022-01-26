@@ -1,6 +1,7 @@
 {
   "name": "server",
   "version": "0.0.0",
+  "private": true,
   "scripts": {
     "dev": "rm -rf dist && yarn build && nodemon ./dist/src/index.js",
     "build": "tsc",
