@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "rm -rf dist && yarn build && nodemon ./dist/src/index.js",
     "build": "tsc",
-    "test": "echo \"Server Tests\"",
+    "test": "jest --coverage",
     "lint": "eslint src --fix"
   },
   "dependencies": {

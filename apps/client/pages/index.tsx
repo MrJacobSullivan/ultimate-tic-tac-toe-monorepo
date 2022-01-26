@@ -14,7 +14,7 @@ const Home: NextPage = () => (
     <main>
       <h1>Hello, world.</h1>
 
-      <Button onClick={() => console.log('hello')} />
+      <Button />
     </main>
   </div>
 );
