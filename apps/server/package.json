@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon --exec \"node -r esbuild-register ./src/index.ts\" -e .ts",
-    "start": "node -r esbuild-register ./src/index.ts",
+    "dev": "nodemon --exec \"node -r esbuild-register ./index.ts\" -e .ts",
+    "start": "node -r esbuild-register ./index.ts",
     "build": "tsc",
     "test": "jest --coverage",
     "lint": "tsc --noEmit && TIMING=1 eslint src --fix",
@@ -25,6 +25,7 @@
     "@types/node": "^17.0.12",
     "@types/supertest": "^2.0.11",
     "config": "*",
+    "esbuild": "^0.14.14",
     "esbuild-register": "^3.3.2",
     "eslint": "^8.7.0",
     "jest": "^27.4.7",

@@ -6,6 +6,7 @@
     "apps/*",
     "packages/*"
   ],
+  "packageManager": "yarn@1.22.17",
   "scripts": {
     "dev": "turbo run dev --parallel",
     "build": "turbo run build",
