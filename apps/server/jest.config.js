@@ -1,4 +1,6 @@
+/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
 module.exports = {
-  ...require('config/jest-server'),
-  rootDir: '.'
+  preset: 'ts-jest',
+  testEnvironment: 'node',
+  testPathIgnorePatterns: ['<rootDir>/dist']
 };

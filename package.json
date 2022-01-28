@@ -7,60 +7,22 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "turbo run build",
     "dev": "turbo run dev --parallel",
+    "build": "turbo run build",
     "test": "turbo run test",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "clean": "turbo run clean && rm -rf node_modules",
     "prepare": "husky install"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.16.1",
-    "@testing-library/react": "^12.1.2",
-    "@testing-library/react-hooks": "^7.0.2",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.4.0",
-    "esbuild": "^0.14.14",
-    "esbuild-jest": "^0.5.0",
     "husky": "^7.0.4",
-    "identity-obj-proxy": "^3.0.0",
-    "jest": "^27.4.7",
     "lint-staged": "^12.3.2",
     "prettier": "^2.5.1",
     "turbo": "latest"
   },
-  "turbo": {
-    "pipeline": {
-      "build": {
-        "dependsOn": [
-          "^build"
-        ],
-        "outputs": [
-          "dist/**",
-          ".next/**"
-        ]
-      },
-      "test": {
-        "dependsOn": [
-          "^build"
-        ],
-        "outputs": [
-          "coverage/**"
-        ]
-      },
-      "lint": {
-        "outputs": []
-      },
-      "dev": {
-        "cache": false
-      }
-    }
-  },
   "lint-staged": {
     "apps/**/*.{js,ts,jsx,tsx}": [
-      "eslint --fix"
-    ],
-    "packages/ui/**/*.{js,ts,jsx,tsx}": [
       "eslint --fix"
     ],
     "*.json": [
