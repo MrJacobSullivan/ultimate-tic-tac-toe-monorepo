@@ -1,20 +1,16 @@
-import { json, urlencoded } from 'body-parser';
-import express from 'express';
-import morgan from 'morgan';
-import cors from 'cors';
+import 'reflect-metadata';
+import * as http from 'http';
 
-const createServer = () => {
-  const app = express();
+import app from './app';
+import socketServer from './socket';
 
-  app
-    .disable('x-powered-by')
-    .use(morgan('dev'))
-    .use(urlencoded({ extended: true }))
-    .use(json())
-    .use(cors())
-    .get('/', (_req, res) => res.json({ apiUp: true }));
+const port = process.env.PORT || 9000;
+app.set('port', port);
 
-  return app;
-};
+const server = http.createServer(app);
 
-export default createServer;
+server.listen(port);
+server.on('error', () => {});
+server.on('listening', () => {});
+
+const io = socketServer(server);
