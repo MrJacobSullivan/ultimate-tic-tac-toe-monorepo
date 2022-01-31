@@ -14,3 +14,5 @@ server.on('error', () => {});
 server.on('listening', () => {});
 
 const io = socketServer(server);
+
+export default io;

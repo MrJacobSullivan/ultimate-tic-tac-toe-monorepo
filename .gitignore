@@ -16,6 +16,7 @@ build
 # misc
 .DS_Store
 *.pem
+*.local
 
 # debug
 npm-debug.log*
@@ -37,3 +38,4 @@ yarn-error.log*
 
 # build
 dist
+dist-ssr
