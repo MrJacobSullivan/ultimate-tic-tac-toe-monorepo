@@ -1,43 +1,7 @@
-import { Player } from './types/index';
+import { GlobalBoard, LocalBoard, State, CoordinatePair, Cell } from './types';
 
-interface Move {
-  i: number;
-  j: number;
-}
-
-interface GameState {
-  board: (Player | null)[][];
-  playable: null | Move;
-  history: Move[];
-  recent: null | Move;
-  winner: Player | boolean;
-  mark: Player;
-}
-
-export default class Engine {
-  private dimensions = 9;
-
-  private generateLocalBoard() {
-    return [...Array(this.dimensions)].map(() => null);
-  }
-
-  private generateGlobalBoard() {
-    return [...Array(this.dimensions)].map(() => this.generateLocalBoard());
-  }
-
-  private defaultState: GameState = {
-    board: this.generateGlobalBoard(),
-    playable: null,
-    history: [],
-    recent: null,
-    winner: false,
-    mark: Player.X
-  };
-
-  public state = this.defaultState;
-  constructor(state?: GameState) {
-    if (state) this.state = state;
-  }
+export default class GameState {
+  private state: State;
 
   private WINNING_COMBINATIONS = [
     [0, 1, 2],
@@ -50,83 +14,190 @@ export default class Engine {
     [2, 4, 6]
   ];
 
-  public placeMark(i: number, j: number) {
-    const board = this.state.board.map((globalBoard, g) => {
-      if (i !== g) return globalBoard;
-      return globalBoard.map((localBoard, l) => {
-        if (j !== l) return localBoard;
-        return this.state.mark;
-      });
-    });
-
-    this.state.board = board as Player[][] | null[][];
-    return board;
-  }
-
-  private determinWin(i: number) {
-    return this.WINNING_COMBINATIONS.some((combination) => {
-      return combination.every((index) => {
-        return this.state.board[i][index] === this.state.mark;
-      });
+  private constructBoard(): GlobalBoard {
+    return [...(Array(9) as LocalBoard)].map(() => {
+      return [...Array(9)].map(() => null);
     });
   }
 
-  private determineDraw(i: number) {
-    return this.state.board[i].every(
-      (cell) => cell !== null && cell.length === 1
-    );
+  private initialState: State = {
+    board: this.constructBoard(),
+    mark: 'X',
+    history: [],
+    winner: false
+  };
+
+  constructor() {
+    this.state = { ...this.initialState };
   }
 
-  private determinePlayable(i: number, j: number) {
-    return this.state.board[i].length !== 1 ? j : null;
+  get initial() {
+    return this.initialState;
   }
 
-  private determineGameBoard(i: number) {
-    const localWinner = this.determinWin(i);
-    const localDraw = this.determineDraw(i);
-
-    if (localWinner) {
-      const board = this.state.board.map((globalBoard, g) => {
-        if (i !== g) return globalBoard;
-        return this.state.mark;
-      });
-      this.state.board = board as Player[][] | null[][];
-    }
-
-    if (localDraw) {
-      const board = this.state.board.map((globalBoard, g) => {
-        if (i !== g) return globalBoard;
-        return this.generateLocalBoard();
-      });
-      this.state.board = board as Player[][] | null[][];
-    }
-
+  get board() {
     return this.state.board;
   }
 
-  private deriveGameState(state: GameState, move: Move) {
-    const determinedBoard = this.determineGameBoard(move.i);
+  get mark() {
+    return this.state.mark;
+  }
 
-    const globalWinner = this.determinWin(move.i);
-    const globalDraw = this.determineDraw(move.i);
+  get history() {
+    return this.state.history;
+  }
 
-    const derivedBoard = globalDraw
-      ? this.generateGlobalBoard()
-      : determinedBoard;
+  get winner() {
+    return this.state.winner;
+  }
 
-    const board = derivedBoard;
-    const playable = move;
-    const history = [...this.state.history, move];
-    const winner = globalWinner ? this.state.mark : false;
-    const mark = this.state.mark === Player.X ? Player.O : Player.X;
+  get recent() {
+    if (!this.state.history.length) return null;
+    return this.history[this.state.history.length - 1];
+  }
 
-    this.state = { ...this.state, board, playable, history, winner, mark };
+  get gameState() {
     return this.state;
   }
 
-  public constructGameState(history: Move[]) {
-    return history.reduce((state: GameState, current: Move): GameState => {
-      return this.deriveGameState(state, current);
-    }, this.defaultState);
+  get turnCount() {
+    return this.state.history.length;
+  }
+
+  // WIP - set to private
+  private get legalMoves(): CoordinatePair[] {
+    if (this.recent) {
+      const board = this.state.board[this.recent.i];
+      if (typeof board === 'string') {
+        // TODO: figure out efficient way to implement this function
+      }
+    }
+    return [];
+  }
+
+  private validateMove(move: CoordinatePair) {
+    if (this.recent === null) return;
+    if (this.recent.j === move.i) {
+      if (this.board[move.i][move.j] === null) return;
+    }
+    throw new Error();
+  }
+
+  private clearLocalBoard(move: CoordinatePair) {
+    this.state.board[move.i] = this.initialState.board[move.i];
+  }
+
+  private clearGlobalBoard() {
+    this.state.board = this.initialState.board;
+  }
+
+  private placeLocal(move: CoordinatePair) {
+    let board = [...this.state.board];
+    const localBoard = board[move.i];
+
+    if (localBoard.length === 1) throw new Error();
+    else if (localBoard[move.j] !== null) throw new Error('hello, world');
+    else {
+      this.state.board = board.map((globalCell, g) => {
+        if (move.i !== g) return globalCell;
+        if (typeof globalCell === 'string') {
+          return globalCell;
+        } else {
+          return globalCell.map((localCell, l) => {
+            if (move.j !== l) return localCell;
+            return this.state.mark;
+          });
+        }
+      });
+    }
+  }
+
+  private placeGlobal(move: CoordinatePair) {
+    let board = [...this.state.board];
+    const localBoard = board[move.i];
+
+    if (localBoard.length === 1) throw new Error();
+    else {
+      board[move.i] = this.state.mark;
+      this.state.board = board;
+    }
+  }
+
+  private determineWinner(cb: (index: number) => boolean) {
+    return this.WINNING_COMBINATIONS.some((combination) => {
+      return combination.every((index) => cb(index));
+    });
+  }
+
+  private determineLocalWinner(move: CoordinatePair) {
+    return this.determineWinner((index) => {
+      return this.board[move.i][index] === this.mark;
+    });
+  }
+
+  private determineGlobalWinner() {
+    return this.determineWinner((index) => {
+      return this.board[index] === this.mark;
+    });
+  }
+
+  private determineLocalDraw(move: CoordinatePair) {
+    if (typeof this.board[move.i] !== 'string') {
+      const board = this.board[move.i] as Cell[];
+      if (board.length === 1) return false;
+      return board.every((cell) => cell !== null);
+    }
+    return false;
+  }
+
+  private determineGlobalDraw() {
+    return this.board.every((cell) => cell.length === 1);
+  }
+
+  private determineGameState(move: CoordinatePair) {
+    this.placeLocal(move);
+
+    const localWinner = this.determineLocalWinner(move);
+    if (localWinner) this.placeGlobal(move);
+
+    const localDraw = this.determineLocalDraw(move);
+    if (localDraw) this.clearLocalBoard(move);
+
+    const globalWinner = this.determineGlobalWinner();
+    if (globalWinner) this.state.winner = this.mark;
+
+    const globalDraw = this.determineGlobalDraw();
+    if (globalDraw) this.clearGlobalBoard();
+
+    this.state.mark = this.mark === 'X' ? 'O' : 'X';
+    this.state.history = [...this.state.history, move];
+  }
+
+  public reset() {
+    this.state = { ...this.initialState };
+  }
+
+  public place(move: CoordinatePair) {
+    const cachedState = { ...this.state };
+    if (this.winner) throw new Error();
+
+    try {
+      this.validateMove(move);
+      this.determineGameState(move);
+    } catch (err) {
+      this.state = { ...cachedState };
+    }
+  }
+
+  public set(history: CoordinatePair[]) {
+    const cachedState = { ...this.state };
+    this.reset();
+    try {
+      history.forEach((move) => {
+        this.determineGameState(move);
+      });
+    } catch (err) {
+      this.state = { ...cachedState };
+    }
   }
 }

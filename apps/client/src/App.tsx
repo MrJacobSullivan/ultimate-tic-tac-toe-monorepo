@@ -1,5 +1,9 @@
 import * as React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+import Header from './components/Header';
+import Main from './components/Main';
+import Footer from './components/Footer';
 
 import Home from './pages/Home';
 import Play from './pages/Play';
@@ -7,20 +11,17 @@ import Error from './pages/Error';
 
 const App = () => (
   <Router>
-    <nav>
-      <Link to="/">Home</Link>
-      <Link to="/play">Play</Link>
-    </nav>
+    <Header />
 
-    <main>
+    <Main>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/play" element={<Play />} />
         <Route path="*" element={<Error />} />
       </Routes>
-    </main>
+    </Main>
 
-    <footer>Footer</footer>
+    <Footer />
   </Router>
 );
 
