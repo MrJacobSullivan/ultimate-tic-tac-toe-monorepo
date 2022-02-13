@@ -52,8 +52,8 @@ export default class GameState {
   }
 
   get recent() {
-    if (!this.state.history.length) return null;
-    return this.history[this.state.history.length - 1];
+    if (!this.history.length) return null;
+    return this.history[this.history.length - 1];
   }
 
   get gameState() {
@@ -61,13 +61,13 @@ export default class GameState {
   }
 
   get turnCount() {
-    return this.state.history.length;
+    return this.history.length;
   }
 
   // WIP - set to private
   private get legalMoves(): CoordinatePair[] {
     if (this.recent) {
-      const board = this.state.board[this.recent.i];
+      const board = this.board[this.recent.i];
       if (typeof board === 'string') {
         // TODO: figure out efficient way to implement this function
       }
@@ -194,6 +194,7 @@ export default class GameState {
     this.reset();
     try {
       history.forEach((move) => {
+        this.validateMove(move);
         this.determineGameState(move);
       });
     } catch (err) {

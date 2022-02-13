@@ -6,8 +6,8 @@
     "index.ts"
   ],
   "scripts": {
-    "test": "jest --coverage",
-    "test:watch": "jest --watch"
+    "watch": "jest --watch",
+    "test": "jest --coverage"
   },
   "devDependencies": {
     "@types/jest": "^27.4.0",
