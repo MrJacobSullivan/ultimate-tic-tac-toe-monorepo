@@ -1,7 +1,7 @@
-import { add } from '../lib/add';
+import Engine from 'engine';
 
 describe('sanity', () => {
   test('should return true', () => {
-    expect(add(1, 1)).toBe(2);
+    expect(new Engine().board).toBeTruthy();
   });
 });

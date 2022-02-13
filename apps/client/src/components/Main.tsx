@@ -1,12 +1,5 @@
 import * as React from 'react';
-import { MainContainer } from './Main.styled';
 
-interface IProps {
-  children: React.ReactChildren | React.ReactElement;
-}
-
-const Main = ({ children }: IProps) => (
-  <MainContainer>{children}</MainContainer>
-);
+const Main: React.FC = ({ children }) => <div>{children}</div>;
 
 export default Main;

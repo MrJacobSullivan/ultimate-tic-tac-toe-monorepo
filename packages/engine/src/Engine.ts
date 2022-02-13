@@ -15,7 +15,7 @@ export default class GameState {
   ];
 
   private constructBoard(): GlobalBoard {
-    return [...(Array(9) as LocalBoard)].map(() => {
+    return [...Array(9)].map(() => {
       return [...Array(9)].map(() => null);
     });
   }

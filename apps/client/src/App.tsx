@@ -7,22 +7,28 @@ import Footer from './components/Footer';
 
 import Home from './pages/Home';
 import Play from './pages/Play';
-import Error from './pages/Error';
 
-const App = () => (
-  <Router>
-    <Header />
+import { useGameState } from './hooks/useGameState';
+import { useHandlePlace } from './hooks/useHandlePlace';
 
-    <Main>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/play" element={<Play />} />
-        <Route path="*" element={<Error />} />
-      </Routes>
-    </Main>
+const App = () => {
+  const { board } = useGameState();
+  const handlePlace = useHandlePlace();
 
-    <Footer />
-  </Router>
-);
+  return (
+    <Router>
+      <Header />
+      <Main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/play" element={<Play />} />
+        </Routes>
+
+        <button onClick={() => handlePlace({ i: 0, j: 0 })}>Place</button>
+      </Main>
+      <Footer />
+    </Router>
+  );
+};
 
 export default App;

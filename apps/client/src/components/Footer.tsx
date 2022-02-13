@@ -1,15 +1,12 @@
 import * as React from 'react';
-import { FooterContainer, CopyrightText } from './Footer.styled';
 
 const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    <FooterContainer>
-      <CopyrightText>
-        &copy; {year} Jacob Sullivan. All rights reserved.
-      </CopyrightText>
-    </FooterContainer>
+    <footer>
+      <span>&copy; {year} Jacob Sullivan. All rights reserved.</span>
+    </footer>
   );
 };
 

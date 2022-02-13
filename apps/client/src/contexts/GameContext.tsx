@@ -1,2 +1,10 @@
 import * as React from 'react';
-import * as logger from 'use-reducer-logger';
+import Engine from 'engine';
+import { GameContextResult } from 'src/types';
+
+export const GameContext = React.createContext<GameContextResult>({
+  engine: new Engine(),
+  handlePlace: () => {},
+  handleSet: () => {},
+  handleReset: () => {}
+});
