@@ -6,6 +6,8 @@ import { initialState } from 'engine';
 import GameContextProvider from './providers/GameContextProvider';
 
 import App from './App';
+import 'preflight';
+import './sass/global.scss';
 
 import Home from './pages/Home';
 import Play from './pages/Play';

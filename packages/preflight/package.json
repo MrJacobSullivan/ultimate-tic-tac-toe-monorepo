@@ -1,0 +1,9 @@
+{
+  "name": "preflight",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {},
+  "dependencies": {
+    "tailwindcss": "^3.0.22"
+  }
+}
