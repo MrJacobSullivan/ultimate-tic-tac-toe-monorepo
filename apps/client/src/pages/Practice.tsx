@@ -1,11 +1,11 @@
 import * as React from 'react';
 
-const Play = () => {
+const Practice = () => {
   return (
     <div>
-      <p>Play</p>
+      <p>Practice</p>
     </div>
   );
 };
 
-export default Play;
+export default Practice;

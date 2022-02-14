@@ -1,11 +1,11 @@
 import * as React from 'react';
 
-const Play = () => {
+const NotFound = () => {
   return (
     <div>
-      <p>Play</p>
+      <p>Not Found</p>
     </div>
   );
 };
 
-export default Play;
+export default NotFound;
