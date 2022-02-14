@@ -1,31 +1,34 @@
 import * as React from 'react';
 import logger from 'use-reducer-logger';
-import Engine, { CoordinatePair, History } from 'engine';
+import {
+  place,
+  set,
+  initialState as defaultState,
+  State,
+  CoordinatePair
+} from 'engine';
 import { GameReducerActions, GameReducerActionType } from '../types';
 
 export const useGameStateReducer = (
-  initial: Engine
+  initialState: State
 ): {
-  engine: Engine;
+  state: State;
   handlePlace: (move: CoordinatePair) => void;
   handleSet: (history: History) => void;
   handleReset: () => void;
 } => {
-  const [engine, dispatch] = React.useReducer(
-    logger((engine: Engine, action: GameReducerActionType) => {
+  const [state, dispatch] = React.useReducer(
+    logger((state: State, action: GameReducerActionType) => {
       switch (action.type) {
         case GameReducerActions.PLACE:
-          engine.place(action.move);
-          return engine;
+          return place({ state, move: action.move });
         case GameReducerActions.SET:
-          engine.set(action.history);
-          return engine;
+          return set({ state, history: action.history });
         case GameReducerActions.RESET:
-          engine.reset();
-          return engine;
+          return defaultState;
       }
     }),
-    initial
+    initialState
   );
 
   const handlePlace = React.useCallback((move: CoordinatePair) => {
@@ -48,5 +51,5 @@ export const useGameStateReducer = (
     });
   }, []);
 
-  return { engine, handlePlace, handleSet, handleReset };
+  return { state, handlePlace, handleSet, handleReset };
 };

@@ -3,6 +3,6 @@ import { State } from 'engine';
 import { GameContext } from '../contexts/GameContext';
 
 export const useGameState = (): State => {
-  const { engine } = React.useContext(GameContext);
-  return engine.gameState;
+  const { state } = React.useContext(GameContext);
+  return state;
 };
