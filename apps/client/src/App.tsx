@@ -12,8 +12,8 @@ import { useGameState } from './hooks/useGameState';
 import { useHandlePlace } from './hooks/useHandlePlace';
 
 const App = () => {
-  const { board } = useGameState();
   const handlePlace = useHandlePlace();
+  const { error, mark } = useGameState();
 
   return (
     <Router>
@@ -24,7 +24,11 @@ const App = () => {
           <Route path="/play" element={<Play />} />
         </Routes>
 
-        <button onClick={() => handlePlace({ i: 0, j: 0 })}>Place</button>
+        <p>{mark}</p>
+        {error && <p>{error}</p>}
+
+        <button onClick={() => handlePlace({ i: 0, j: 0 })}>Place 1</button>
+        <button onClick={() => handlePlace({ i: 0, j: 1 })}>Place 2</button>
       </Main>
       <Footer />
     </Router>

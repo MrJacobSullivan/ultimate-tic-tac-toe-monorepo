@@ -1,2 +1,3 @@
 export * from './src/types';
-export { default } from './src/Engine';
+export { initialState } from './src/lib/constants';
+export { place, set } from './src/actions';

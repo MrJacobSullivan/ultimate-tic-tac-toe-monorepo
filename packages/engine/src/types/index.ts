@@ -16,13 +16,23 @@ export type Cell = Mark | null;
 export type LocalBoard = Cell[] | Mark;
 export type GlobalBoard = LocalBoard[];
 
+export enum Errors {
+  GameOver = 'Game Over',
+  IllegalMove = 'Illegal Move',
+  GlobalCellOccupied = 'Global Cell Occupied',
+  LocalCellOccupied = 'Local Cell Occupied'
+}
+
 export interface State {
   board: GlobalBoard;
   mark: Mark;
   history: History;
+  recent: CoordinatePair | null;
   winner: Winner;
+  error: string | null;
 }
 
-export type Partial<T> = {
-  [P in keyof T]?: T[P];
-};
+export interface ActionInput {
+  state: State;
+  move: CoordinatePair;
+}
