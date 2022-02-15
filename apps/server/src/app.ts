@@ -1,33 +1,32 @@
-import * as httpErrors from 'http-errors';
-import * as express from 'express';
-import * as cookieParser from 'cookie-parser';
-import * as morgan from 'morgan';
-import * as cors from 'cors';
-import 'reflect-metadata';
+import express, { NextFunction, Request, Response } from 'express';
+import error from 'http-errors';
+import cookieParser from 'cookie-parser';
+import morgan from 'morgan';
+import cors from 'cors';
 
-const app = express.default();
+import indexRouter from './routes';
 
-app.use(morgan.default('dev'));
+const app = express();
+
+app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser.default());
-app.use(cors.default());
+app.use(cookieParser());
+app.use(cors());
+
+app.use('/', indexRouter);
+
+app.use((req, res, next) => {
+  next(error(404));
+});
 
 app.use(
-  (req: express.Request, res: express.Response, next: express.NextFunction) => {
-    next(httpErrors.default(404));
-  }
-);
+  (err: error.HttpError, req: Request, res: Response, next: NextFunction) => {
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-app.use(
-  (
-    err: { message?: string; status?: number },
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction
-  ) => {
     res.status(err.status || 500);
-    res.json({ message: err.message });
+    res.send('error');
   }
 );
 
