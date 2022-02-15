@@ -1,55 +1,61 @@
 import * as React from 'react';
-import { range } from '../../utils';
-import GlobalSquare from './GlobalSquare';
+import { Mark as EngineMark, CoordinatePair } from 'engine';
 import { useGameState } from '../../hooks/useGameState';
 import { useHandlePlace } from '../../hooks/useHandlePlace';
 import Mark from './Mark';
-import { Mark as EngineMark, CoordinatePair } from 'engine';
+import styles from './GameBoard.module.scss';
 
 const GameBoard = () => {
   const { board, recent } = useGameState();
   const handlePlace = useHandlePlace();
 
   return (
-    <div className="game">
-      {/* {range(9).map((i) => (
-        <GlobalSquare key={i} i={i} />
-      ))} */}
-
+    <div className={styles.gameBoard}>
       {board.map((globalCell: any, i: number) => {
         if (typeof globalCell === 'string') {
           return (
-            <div key={i} className="globalCell">
-              <Mark global value={globalCell as EngineMark} />
+            <div key={i} className={styles.globalBoard}>
+              <div className={styles.globalCell}>
+                <Mark global value={globalCell as EngineMark} />
+              </div>
             </div>
           );
         }
 
         return (
-          <div
-            key={i}
-            className={recent?.j === i ? 'globalCell__playable' : 'globalCell'}
-          >
-            {globalCell.map((localCell: any, j: number) => {
-              if (localCell) {
+          <div key={i} className={styles.globalBoard}>
+            <div
+              key={i}
+              className={
+                recent?.j === i
+                  ? styles.globalCell__playable
+                  : styles.globalCell
+              }
+            >
+              {globalCell.map((localCell: any, j: number) => {
+                if (localCell) {
+                  return (
+                    <div key={j} className={styles.localBoard}>
+                      <div className={styles.localCell}>
+                        <Mark value={localCell as EngineMark} />
+                      </div>
+                    </div>
+                  );
+                }
+
                 return (
-                  <div key={j}>
-                    <Mark value={localCell as EngineMark} />
+                  <div key={j} className={styles.localBoard}>
+                    <div
+                      className={styles.localCell__playable}
+                      onClick={() => handlePlace({ i, j } as CoordinatePair)}
+                    />
                   </div>
                 );
-              }
-
-              return (
-                <div
-                  key={j}
-                  onClick={() => handlePlace({ i, j } as CoordinatePair)}
-                />
-              );
-            })}
+              })}
+            </div>
           </div>
         );
       })}
-
       <button onClick={() => handlePlace({ i: 0, j: 0 })}>Move</button>
     </div>
   );

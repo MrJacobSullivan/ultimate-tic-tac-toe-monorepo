@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useGameState } from 'src/hooks/useGameState';
+import { useGameState } from '../../hooks/useGameState';
 
 const History = () => {
   const { history } = useGameState();

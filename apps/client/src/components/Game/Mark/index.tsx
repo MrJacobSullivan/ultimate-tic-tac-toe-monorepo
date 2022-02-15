@@ -1,8 +1,7 @@
 import * as React from 'react';
 import Cross from './Cross';
 import Circle from './Circle';
-import { useGameState } from 'src/hooks/useGameState';
-import { Coordinate, Mark as EngineMark } from 'engine';
+import { Mark as EngineMark } from 'engine';
 
 const Mark = ({
   value,

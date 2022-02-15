@@ -1,0 +1,60 @@
+@import '../../sass/constants';
+@import '../../sass/mixins';
+
+.globalBoard {
+  align-content: center;
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  height: 400px;
+  justify-content: center;
+  justify-items: center;
+  width: 400px;
+  background: red;
+}
+
+.localBoard {
+  align-content: center;
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  height: $cell-size * 3;
+  justify-content: center;
+  justify-items: center;
+  width: $cell-size * 3;
+  margin: 0.75rem;
+}
+
+.globalCell {
+  @extend %square;
+  border: 3px solid $border-global;
+}
+
+.globalCell__playable {
+  @extend .globalCell;
+  background: $current;
+}
+
+.globalCell__potential {
+  @extend .globalCell;
+  background: $potential;
+}
+
+.localCell {
+  @extend %square;
+  align-items: center;
+  border: 2px solid $border-local;
+  cursor: default;
+  display: flex;
+  height: $cell-size;
+  justify-content: center;
+  width: $cell-size;
+}
+
+.localCell__playable {
+  @extend .localCell;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

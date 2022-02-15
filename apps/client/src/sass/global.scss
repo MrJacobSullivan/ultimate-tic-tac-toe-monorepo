@@ -6,37 +6,3 @@ body {
   color: $color;
   font-family: $system-font;
 }
-
-// src/components/Game/GameBoard.tsx
-
-.game {
-  display: flex;
-  background: red;
-  width: 100%;
-  height: 100%;
-}
-
-.globalCell {
-  width: 16px;
-  height: 16px;
-  background: $board-global;
-}
-
-.globalCell__playable {
-}
-
-// src/components/Game/Mark.tsx
-
-.mark {
-  cursor: default;
-  stroke: $stroke;
-}
-
-.mark__recent {
-  cursor: default;
-  stroke: $recent;
-}
-
-.mark__hover {
-  stroke: $hover;
-}

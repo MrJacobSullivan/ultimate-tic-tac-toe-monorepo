@@ -1,12 +1,12 @@
 import * as React from 'react';
-import GameBoard from '../components/Game/GameBoard';
+import GameContainer from '../components/Game/GameContainer';
 
 const Play = () => {
   return (
-    <div>
+    <div style={{ width: '100vw' }}>
       <p>Play</p>
 
-      <GameBoard />
+      <GameContainer />
     </div>
   );
 };

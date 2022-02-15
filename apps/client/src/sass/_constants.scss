@@ -1,14 +1,18 @@
 @import '../../../../node_modules/open-color/open-color.scss';
 
+// sizes
+$cell-size: 5rem;
+$mark-size: calc($cell-size * 0.9);
+
 // colors
 $background: $oc-blue-1;
 $color: $oc-blue-9;
 
-$board-global: $oc-blue-5;
+$border-global: $oc-blue-5;
 $border-local: $oc-blue-4;
 
 $stroke: $color;
-$hover: $board-global;
+$hover: $border-global;
 $recent: $oc-red-5;
 $current: $oc-blue-2;
 $potential: $oc-yellow-2;
