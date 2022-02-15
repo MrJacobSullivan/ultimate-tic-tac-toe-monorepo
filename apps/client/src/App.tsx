@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Outlet } from 'react-router-dom';
 
-import Header from './components/Header';
-import Main from './components/Main';
-import Footer from './components/Footer';
+import Header from './components/UserInterface/Header';
+import Main from './components/UserInterface/Main';
+import Footer from './components/UserInterface/Footer';
 
 const App = () => {
   return (

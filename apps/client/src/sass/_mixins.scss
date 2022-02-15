@@ -1,0 +1,21 @@
+%square {
+  &:first-child,
+  &:nth-child(2),
+  &:nth-child(3) {
+    border-top: transparent;
+  }
+
+  &:nth-child(3n + 1) {
+    border-left: transparent;
+  }
+
+  &:nth-child(3n + 3) {
+    border-right: transparent;
+  }
+
+  &:last-child,
+  &:nth-child(8),
+  &:nth-child(7) {
+    border-bottom: transparent;
+  }
+}
