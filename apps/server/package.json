@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon --exec \"node -r esbuild-register ./index.ts\" -e .ts",
-    "start": "node -r esbuild-register ./index.ts",
+    "dev": "nodemon --exec \"node -r esbuild-register ./server.ts\" -e .ts",
+    "start": "node -r esbuild-register ./server.ts",
     "build": "tsc",
     "test": "jest --coverage",
     "test:dev": "jest --watch",

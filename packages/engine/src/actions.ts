@@ -42,3 +42,29 @@ export const set = ({
   }
   return state;
 };
+
+export const validateState = ({
+  previousState,
+  newState
+}: {
+  previousState: State;
+  newState: State;
+}): boolean => {
+  const combinedHistory = [
+    ...(previousState.history as CoordinatePair[]),
+    newState.recent as CoordinatePair
+  ];
+
+  if (newState.recent === undefined) return false;
+
+  const expectedState = set({
+    state: initialState,
+    history: combinedHistory
+  });
+
+  expectedState.history.forEach((move, i) => {
+    if (newState.history[i] !== move) return false;
+  });
+
+  return true;
+};

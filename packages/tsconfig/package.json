@@ -5,5 +5,8 @@
   "files": [
     "nextjs.json",
     "node.json"
-  ]
+  ],
+  "scripts": {
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+  }
 }

@@ -1,0 +1,15 @@
+export const EVENTS = {
+  CONNECTION: 'connection',
+  DISCONNECTION: 'disconnection',
+  CLIENT: {
+    CREATE_GAME: 'CREATE_GAME',
+    MAKE_MOVE: 'MAKE_MOVE',
+    JOIN_GAME: 'JOIN_GAME'
+  },
+  SERVER: {
+    GAMES: 'GAMES',
+    JOINED_GAME: 'JOINED_GAME',
+    GAME_MOVE: 'GAME_MOVE',
+    REJECTED_MOVE: 'REJECTED_MOVE'
+  }
+};
