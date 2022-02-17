@@ -1,0 +1,15 @@
+@import '../../../sass/global.scss';
+
+.localBoard {
+  align-content: center;
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: center;
+  justify-items: center;
+
+  height: $cell-size * 3;
+  width: $cell-size * 3;
+
+  margin: 0.5rem;
+}

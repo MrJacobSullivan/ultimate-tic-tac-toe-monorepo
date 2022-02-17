@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { GameContext } from '../contexts/GameContext';
+import { ApplicationContext } from '../contexts/ApplicationContext';
 
 export const useHandleSet = () => {
-  const { handleSet } = React.useContext(GameContext);
+  const { handleSet } = React.useContext(ApplicationContext);
   return handleSet;
 };

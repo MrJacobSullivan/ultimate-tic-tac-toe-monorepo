@@ -1,0 +1,15 @@
+@import '../../../sass/global.scss';
+
+.mark {
+  cursor: default;
+  stroke: $stroke;
+}
+
+.mark__recent {
+  cursor: default;
+  stroke: $recent;
+}
+
+.mark__hover {
+  stroke: $hover;
+}

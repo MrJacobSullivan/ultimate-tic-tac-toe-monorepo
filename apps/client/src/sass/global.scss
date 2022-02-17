@@ -1,5 +1,5 @@
-@use './mixins';
-@import 'constants';
+@use './_mixins.scss';
+@import './_constants.scss';
 
 body {
   background: $background;

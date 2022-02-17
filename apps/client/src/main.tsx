@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { initialState } from 'engine';
-import GameContextProvider from './providers/GameContextProvider';
+import ApplicationContext from './providers/ApplicationContextProvider';
 
 import App from './App';
 import 'preflight';
@@ -18,7 +18,7 @@ import NotFound from './pages/NotFound';
 
 ReactDOM.render(
   <React.StrictMode>
-    <GameContextProvider initialState={initialState}>
+    <ApplicationContext initialState={initialState}>
       <Router>
         <Routes>
           <Route path="/" element={<App />}>
@@ -32,7 +32,7 @@ ReactDOM.render(
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
-    </GameContextProvider>
+    </ApplicationContext>
   </React.StrictMode>,
   document.getElementById('root')
 );

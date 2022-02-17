@@ -1,29 +1,28 @@
 import * as React from 'react';
 import { Outlet } from 'react-router-dom';
-import { io } from 'socket.io-client';
 
+import Page from './components/UserInterface/Page';
 import Header from './components/UserInterface/Header';
 import Main from './components/UserInterface/Main';
 import Footer from './components/UserInterface/Footer';
 
+import { useWebSocket } from './hooks/useWebSocket';
+
 const App = () => {
-  const connectSocket = () => {
-    const socket = io('http://localhost:8080');
-    console.log(socket);
-  };
+  const { socket } = useWebSocket();
 
   React.useEffect(() => {
-    connectSocket();
-  }, []);
+    if (socket) console.log(socket);
+  }, [socket]);
 
   return (
-    <div>
+    <Page>
       <Header />
       <Main>
         <Outlet />
       </Main>
       <Footer />
-    </div>
+    </Page>
   );
 };
 

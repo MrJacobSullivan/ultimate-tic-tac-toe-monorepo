@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { useGameState } from '../../hooks/useGameState';
+import { useGameState } from '../../../hooks/useGameState';
+import styles from './History.module.scss';
 
 const History = () => {
   const { history } = useGameState();
@@ -7,11 +8,11 @@ const History = () => {
   if (!history) return null;
 
   return (
-    <div>
+    <div className={styles.historyContainer}>
       {history.map((move, number) => (
-        <li key={number}>
+        <p key={number}>
           {move.i} | {move.j}
-        </li>
+        </p>
       ))}
     </div>
   );

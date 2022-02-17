@@ -1,15 +1,17 @@
 import { CoordinatePair, History } from 'engine';
-import { useGameStateReducer } from 'src/hooks/useGameStateReducer';
+import { useApplicationContextReducer } from '../hooks/useApplicationContextReducer';
 
-export enum GameReducerActions {
+export enum ApplicationReducerActions {
   PLACE = 'place',
   SET = 'set',
   RESET = 'reset'
 }
 
-export type GameReducerActionType =
-  | { type: GameReducerActions.PLACE; move: CoordinatePair }
-  | { type: GameReducerActions.SET; history: History }
-  | { type: GameReducerActions.RESET };
+export type ApplicationReducerActionType =
+  | { type: ApplicationReducerActions.PLACE; move: CoordinatePair }
+  | { type: ApplicationReducerActions.SET; history: History }
+  | { type: ApplicationReducerActions.RESET };
 
-export type GameContextResult = ReturnType<typeof useGameStateReducer>;
+export type ApplicationContextResult = ReturnType<
+  typeof useApplicationContextReducer
+>;

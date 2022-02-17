@@ -1,0 +1,10 @@
+@import '../../../sass/global.scss';
+
+.historyContainer {
+  height: 50%;
+  width: 20vw;
+  margin: 1rem;
+  border: 2px solid $border-global;
+  display: flex;
+  flex-direction: column;
+}

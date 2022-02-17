@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useGameState } from '../../hooks/useGameState';
+import { useGameState } from '../../../hooks/useGameState';
 
 const Winner = () => {
   const { mark } = useGameState();

@@ -1,48 +1,77 @@
 import { Server, Socket } from 'socket.io';
 import { nanoid } from 'nanoid';
-import { State, validateState } from 'engine';
+import { State, validateState, initialState } from 'engine';
 import { EVENTS } from './lib/events';
-
-const games: Record<
-  string,
-  { state: State; users: string[]; O: string | null; X: string | null }
-> = {};
 
 const createSocket = ({ io }: { io: Server }) => {
   console.log('sockets enabled');
 
+  const games: Record<
+    string,
+    {
+      state: State;
+      players: {
+        X: string | null;
+        O: string | null;
+      };
+    }
+  > = {};
   const sockets: Socket[] = [];
 
-  io.on(EVENTS.CONNECTION, (socket: Socket) => {
+  io.on('connection', (socket: Socket) => {
     console.log(`User connected ${socket.id}`);
     sockets.push(socket);
 
-    socket.on(EVENTS.DISCONNECTION, () => {
+    socket.on('disconnection', () => {
       console.log(`User disconnected ${socket.id}`);
 
       const i = sockets.indexOf(socket);
       sockets.splice(i, 1);
     });
 
-    socket.emit(EVENTS.SERVER.GAMES, games);
+    socket.emit('games', games);
 
-    socket.on(EVENTS.CLIENT.CREATE_GAME, ({ state }) => {
+    socket.on('create', () => {
       const gameId = nanoid();
       games[gameId] = {
-        state,
-        users: [],
-        O: null,
-        X: null
+        state: initialState,
+        players: {
+          X: socket.id,
+          O: null
+        }
       };
 
       socket.join(gameId);
 
-      socket.broadcast.emit(EVENTS.SERVER.GAMES, games);
-      socket.emit(EVENTS.SERVER.GAMES, games);
-      socket.emit(EVENTS.SERVER.JOINED_GAME, gameId);
+      socket.broadcast.emit('games', games);
+      socket.emit('games', games);
+      socket.emit('joined', gameId);
     });
 
-    socket.on(EVENTS.CLIENT.MAKE_MOVE, ({ gameId, newState, username }) => {
+    socket.on('join', ({ gameId }) => {
+      const game = games[gameId];
+
+      socket.join(gameId);
+
+      if (game) {
+        games[gameId].players.O = socket.id;
+      } else {
+        games[gameId] = {
+          state: initialState,
+          players: {
+            X: socket.id,
+            O: null
+          }
+        };
+
+        socket.broadcast.emit('games', games);
+        socket.emit('games', games);
+      }
+
+      socket.emit('joined', gameId);
+    });
+
+    socket.on('place', ({ gameId, newState, id }) => {
       const previousState = games[gameId].state;
       const isValid = validateState({
         previousState,
@@ -50,17 +79,10 @@ const createSocket = ({ io }: { io: Server }) => {
       });
 
       if (isValid) {
-        socket.to(gameId).emit(EVENTS.SERVER.GAME_MOVE, { newState, username });
+        socket.to(gameId).emit('game move', { newState });
       } else {
-        socket
-          .to(username)
-          .emit(EVENTS.SERVER.REJECTED_MOVE, { previousState });
+        socket.to(socket.id).emit('rejected', { previousState });
       }
-    });
-
-    socket.on(EVENTS.CLIENT.JOIN_GAME, (gameId) => {
-      socket.join(gameId);
-      socket.emit(EVENTS.SERVER.JOINED_GAME, gameId);
     });
   });
 };

@@ -4,7 +4,7 @@ const Cross: React.FC<{ large: boolean; className: string }> = ({
   large = false,
   className
 }) => {
-  const size = `${large ? 16.5 : 5}rem`;
+  const size = `${large ? 16 : 4}rem`;
 
   return (
     <svg

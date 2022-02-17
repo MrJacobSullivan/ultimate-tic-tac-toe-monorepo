@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { GameContext } from '../contexts/GameContext';
+import { ApplicationContext } from '../contexts/ApplicationContext';
 
 export const useHandlePlace = () => {
-  const { handlePlace } = React.useContext(GameContext);
+  const { handlePlace } = React.useContext(ApplicationContext);
   return handlePlace;
 };

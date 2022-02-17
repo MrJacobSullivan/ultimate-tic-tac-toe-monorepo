@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { GameContext } from '../contexts/GameContext';
+import { ApplicationContext } from '../contexts/ApplicationContext';
 
 export const useHandleReset = () => {
-  const { handleReset } = React.useContext(GameContext);
+  const { handleReset } = React.useContext(ApplicationContext);
   return handleReset;
 };

@@ -1,14 +1,15 @@
 import * as React from 'react';
 import GameContainer from '../components/Game/GameContainer';
+import { useWebSocket } from '../hooks/useWebSocket';
 
 const Play = () => {
-  return (
-    <div style={{ width: '100vw' }}>
-      <p>Play</p>
+  const { createSocket, socket } = useWebSocket();
 
-      <GameContainer />
-    </div>
-  );
+  React.useEffect(() => {
+    if (!socket?.active) createSocket();
+  }, [createSocket, socket?.active]);
+
+  return <GameContainer />;
 };
 
 export default Play;

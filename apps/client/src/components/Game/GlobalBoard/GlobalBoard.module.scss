@@ -1,0 +1,10 @@
+@import '../../../sass/global.scss';
+
+.globalBoard {
+  align-content: center;
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: center;
+  justify-items: center;
+}
