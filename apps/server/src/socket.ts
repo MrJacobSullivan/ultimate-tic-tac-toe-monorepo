@@ -1,7 +1,6 @@
 import { Server, Socket } from 'socket.io';
 import { nanoid } from 'nanoid';
 import { State, validateState, initialState } from 'engine';
-import { EVENTS } from './lib/events';
 
 const createSocket = ({ io }: { io: Server }) => {
   console.log('sockets enabled');
