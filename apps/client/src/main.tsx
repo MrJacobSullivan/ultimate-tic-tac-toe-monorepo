@@ -23,11 +23,11 @@ ReactDOM.render(
         <Routes>
           <Route path="/" element={<App />}>
             <Route index element={<Home />} />
-            <Route path="play" element={<Play />}>
+            {/* <Route path="play" element={<Play />}>
               <Route path=":room_id" element={<Room />} />
             </Route>
             <Route path="practice" element={<Practice />} />
-            <Route path="learn" element={<Learn />} />
+            <Route path="learn" element={<Learn />} /> */}
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

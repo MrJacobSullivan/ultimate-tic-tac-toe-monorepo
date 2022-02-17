@@ -1,9 +1,12 @@
-.container {
+.headerContainer {
   display: flex;
   height: 10vh;
-  background: red;
+  align-items: center;
+  width: 100%;
+}
 
-  h1 {
-    font-size: 3rem;
-  }
+.title {
+  font-size: 2rem;
+  text-align: center;
+  width: 100%;
 }
