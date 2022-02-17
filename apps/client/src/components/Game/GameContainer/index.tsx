@@ -6,10 +6,12 @@ import GameBoard from '../GameBoard';
 // import History from '../History';
 // import ChatContainer from '../../Chat/ChatContainer';
 
+import Mark from '../Mark';
+
 import styles from './GameContainer.module.scss';
 
 const GameContainer = () => {
-  const { winner } = useGameState();
+  const { winner, mark } = useGameState();
 
   return (
     <div className={styles.gameContainer}>

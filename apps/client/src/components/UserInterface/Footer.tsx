@@ -1,14 +1,15 @@
 import * as React from 'react';
+import { GITHUB_REPO } from '../../config';
 import styles from './Footer.module.scss';
 
 const Footer = () => {
-  const year = new Date().getFullYear();
-
   return (
     <footer className={styles.footerContaienr}>
-      <span className={styles.copyright}>
-        &copy; {year} Jacob Sullivan. All rights reserved.
-      </span>
+      <div className={styles.copyright}>
+        <a href={GITHUB_REPO} target="_blank" rel="noopener noreferrer">
+          Source Code on GitHub
+        </a>
+      </div>
     </footer>
   );
 };

@@ -1,12 +1,17 @@
 import * as React from 'react';
 import { useGameState } from '../../../hooks/useGameState';
+import { useHandleReset } from '../../../hooks/useHandleReset';
+import styles from './Winner.module.scss';
 
 const Winner = () => {
-  const { mark } = useGameState();
+  const { winner } = useGameState();
+  const handleReset = useHandleReset();
 
   return (
-    <div>
-      <p>{mark} is the winner!</p>
+    <div className={styles.winnerContainer}>
+      <p className={styles.winnerText} onClick={handleReset}>
+        {winner} is the winner!
+      </p>
     </div>
   );
 };

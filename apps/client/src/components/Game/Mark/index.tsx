@@ -6,13 +6,17 @@ import styles from './Mark.module.scss';
 
 const Mark = ({
   value,
+  small = false,
   global = false
 }: {
   value: EngineMark;
+  small?: boolean;
   global?: boolean;
 }) => {
-  if (value === 'X') return <Cross large={global} className={styles.mark} />;
-  return <Circle large={global} className={styles.mark} />;
+  if (value === 'X') {
+    return <Cross large={global} small={small} className={styles.mark} />;
+  }
+  return <Circle large={global} small={small} className={styles.mark} />;
 };
 
 export default Mark;

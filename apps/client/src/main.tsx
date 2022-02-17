@@ -10,10 +10,10 @@ import 'preflight';
 import './sass/global.scss';
 
 import Home from './pages/Home';
-import Play from './pages/Play';
-import Room from './pages/Room';
-import Practice from './pages/Practice';
-import Learn from './pages/Learn';
+// import Play from './pages/Play';
+// import Room from './pages/Room';
+// import Practice from './pages/Practice';
+// import Learn from './pages/Learn';
 import NotFound from './pages/NotFound';
 
 ReactDOM.render(

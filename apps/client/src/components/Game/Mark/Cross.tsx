@@ -1,10 +1,11 @@
 import * as React from 'react';
 
-const Cross: React.FC<{ large: boolean; className: string }> = ({
-  large = false,
-  className
-}) => {
-  const size = `${large ? 16 : 4}rem`;
+const Cross: React.FC<{
+  large: boolean;
+  small: boolean;
+  className: string;
+}> = ({ large = false, small = false, className }) => {
+  const size = small ? '2rem' : `${large ? 16 : 4}rem`;
 
   return (
     <svg
