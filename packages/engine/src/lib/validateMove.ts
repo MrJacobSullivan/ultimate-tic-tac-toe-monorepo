@@ -10,8 +10,9 @@ export const validateMove = ({
   if (state.winner) {
     throw new Error(Errors.GameOver);
   } else if (
-    (state.recent && state.recent.j !== move.i) ||
-    (state.recent && state.board[state.recent.j].length === 1)
+    state.recent &&
+    state.recent.j !== move.i &&
+    state.board[state.recent.j].length !== 1
   ) {
     throw new Error(Errors.IllegalMove);
   } else if (state.board[move.i].length === 1) {

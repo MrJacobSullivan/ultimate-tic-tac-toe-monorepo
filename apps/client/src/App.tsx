@@ -17,7 +17,7 @@ const App = () => {
 
   return (
     <Page>
-      <Header />
+      {/* <Header /> */}
       <Main>
         <Outlet />
       </Main>
