@@ -13,10 +13,27 @@ const Mark = ({
   small?: boolean;
   global?: boolean;
 }) => {
-  if (value === 'X') {
-    return <Cross large={global} small={small} className={styles.mark} />;
+  if (small) {
+    return value === 'X' ? (
+      <Cross className={styles.mark} svgClassName={styles.svg__small} />
+    ) : (
+      <Circle className={styles.mark} svgClassName={styles.svg__small} />
+    );
   }
-  return <Circle large={global} small={small} className={styles.mark} />;
+
+  if (global) {
+    return value === 'X' ? (
+      <Cross className={styles.mark} svgClassName={styles.svg__large} />
+    ) : (
+      <Circle className={styles.mark} svgClassName={styles.svg__large} />
+    );
+  }
+
+  return value === 'X' ? (
+    <Cross className={styles.mark} svgClassName={styles.svg} />
+  ) : (
+    <Circle className={styles.mark} svgClassName={styles.svg} />
+  );
 };
 
 export default Mark;

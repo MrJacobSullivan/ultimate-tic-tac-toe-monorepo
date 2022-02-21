@@ -2,9 +2,9 @@ import * as React from 'react';
 import { Outlet } from 'react-router-dom';
 
 import Page from './components/UserInterface/Page';
-import Header from './components/UserInterface/Header';
+// import Header from './components/UserInterface/Header';
 import Main from './components/UserInterface/Main';
-import Footer from './components/UserInterface/Footer';
+// import Footer from './components/UserInterface/Footer';
 
 import { useWebSocket } from './hooks/useWebSocket';
 
@@ -21,7 +21,7 @@ const App = () => {
       <Main>
         <Outlet />
       </Main>
-      <Footer />
+      {/* <Footer /> */}
     </Page>
   );
 };

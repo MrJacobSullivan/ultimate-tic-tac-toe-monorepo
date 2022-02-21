@@ -13,3 +13,16 @@
 
   margin: 0.5rem;
 }
+
+.coordinateContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.veritcalCoordinate {
+  color: $color;
+  height: $cell-size;
+  width: $cell-size;
+  display: flex;
+  justify-content: center;
+}

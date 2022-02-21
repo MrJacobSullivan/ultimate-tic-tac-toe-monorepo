@@ -2,7 +2,23 @@
 
 .mark {
   cursor: default;
+
   stroke: $stroke;
+}
+
+.svg {
+  width: 4rem;
+  height: 4rem;
+}
+
+.svg__small {
+  width: 2rem;
+  height: 2rem;
+}
+
+.svg__large {
+  width: 16rem;
+  height: 16rem;
 }
 
 .mark__recent {

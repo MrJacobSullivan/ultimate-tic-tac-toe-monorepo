@@ -15,17 +15,15 @@ const createSocket = ({ io }: { io: Server }) => {
       };
     }
   > = {};
-  const sockets: Socket[] = [];
+  const sockets: Record<string, Socket | undefined> = {};
 
   io.on('connection', (socket: Socket) => {
     console.log(`User connected ${socket.id}`);
-    sockets.push(socket);
+    sockets[socket.id] = socket;
 
     socket.on('disconnection', () => {
       console.log(`User disconnected ${socket.id}`);
-
-      const i = sockets.indexOf(socket);
-      sockets.splice(i, 1);
+      sockets[socket.id] = undefined;
     });
 
     socket.emit('games', games);

@@ -4,7 +4,40 @@
   align-content: center;
   align-items: center;
   display: grid;
-  grid-template-columns: repeat(3, auto);
+  grid-template-columns: repeat(4, auto);
   justify-content: center;
   justify-items: center;
+}
+
+.horizontalCoordinateContainer {
+  display: flex;
+  margin-top: 0.8rem;
+}
+
+.verticalCoordinateContainer {
+  display: flex;
+  flex-direction: column;
+  margin-right: 1rem;
+}
+
+.emptyCell {
+  height: $cell-size;
+  width: $cell-size;
+}
+
+.horizontalCoordinate {
+  color: $color-lighter;
+  height: $cell-size;
+  width: $cell-size;
+  display: flex;
+  justify-content: center;
+}
+
+.verticalCoordinate {
+  color: $color-lighter;
+  height: $cell-size;
+  width: $cell-size;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }

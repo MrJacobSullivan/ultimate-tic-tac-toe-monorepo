@@ -1,7 +1,7 @@
 @import '../../../sass/global.scss';
 
 .globalSquare {
-  @extend %square;
+  @extend %global-square;
   border: 2px solid $border-global;
 }
 

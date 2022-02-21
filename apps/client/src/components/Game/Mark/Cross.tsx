@@ -1,18 +1,14 @@
 import * as React from 'react';
 
 const Cross: React.FC<{
-  large: boolean;
-  small: boolean;
+  svgClassName: string;
   className: string;
-}> = ({ large = false, small = false, className }) => {
-  const size = small ? '2rem' : `${large ? 16 : 4}rem`;
-
+}> = ({ svgClassName, className }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width={size}
-      height={size}
       version="1.1"
+      className={svgClassName}
     >
       <line
         x1="15%"
