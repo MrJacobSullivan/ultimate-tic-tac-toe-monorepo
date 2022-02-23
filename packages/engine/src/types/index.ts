@@ -9,8 +9,6 @@ export type Mark = 'X' | 'O';
 
 export type Winner = Mark | false;
 
-export type History = CoordinatePair[];
-
 export type Cell = Mark | null;
 
 export type LocalBoard = Cell[] | Mark;
@@ -26,7 +24,7 @@ export enum Errors {
 export interface State {
   board: GlobalBoard;
   mark: Mark;
-  history: History;
+  history: CoordinatePair[];
   recent: CoordinatePair | null;
   winner: Winner;
   error: string | null;

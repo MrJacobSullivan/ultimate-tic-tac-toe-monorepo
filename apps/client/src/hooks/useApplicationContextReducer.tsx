@@ -20,7 +20,7 @@ export const useApplicationContextReducer = (
   socket?: Socket;
   setSocket: (socket: Socket) => void;
   handlePlace: (move: CoordinatePair) => void;
-  handleSet: (history: History) => void;
+  handleSet: (history: CoordinatePair[]) => void;
   handleReset: () => void;
 } => {
   const [socket, setSocket] = React.useState<Socket>();
@@ -51,7 +51,7 @@ export const useApplicationContextReducer = (
     }
   }, []);
 
-  const handleSet = React.useCallback((history: History) => {
+  const handleSet = React.useCallback((history: CoordinatePair[]) => {
     dispatch({
       type: ApplicationReducerActions.SET,
       history
