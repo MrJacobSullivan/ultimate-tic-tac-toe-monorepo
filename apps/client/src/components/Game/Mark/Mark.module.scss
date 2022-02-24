@@ -7,18 +7,18 @@
 }
 
 .svg {
-  width: 4rem;
-  height: 4rem;
+  width: calc($cell-size * 0.8);
+  height: calc($cell-size * 0.8);
 }
 
 .svg__small {
-  width: 2rem;
-  height: 2rem;
+  width: calc($cell-size * 0.4);
+  height: calc($cell-size * 0.4);
 }
 
 .svg__large {
-  width: 16rem;
-  height: 16rem;
+  width: calc($cell-size * 3.2);
+  height: calc($cell-size * 3.2);
 }
 
 .mark__recent {

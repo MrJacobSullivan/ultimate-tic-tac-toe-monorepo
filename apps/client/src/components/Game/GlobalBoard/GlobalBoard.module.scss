@@ -11,13 +11,13 @@
 
 .horizontalCoordinateContainer {
   display: flex;
-  margin-top: 0.8rem;
+  margin-top: calc($root-size / 12.5);
 }
 
 .verticalCoordinateContainer {
   display: flex;
   flex-direction: column;
-  margin-right: 1rem;
+  margin-right: calc($root-size / 10);
 }
 
 .emptyCell {

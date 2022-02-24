@@ -2,7 +2,7 @@
 
 .globalSquare {
   @extend %global-square;
-  border: 2px solid $border-global;
+  border: calc($root-size * 0.02) solid $border-global;
 }
 
 .globalSquare__playable {

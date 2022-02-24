@@ -11,7 +11,7 @@
   height: $cell-size * 3;
   width: $cell-size * 3;
 
-  margin: 0.5rem;
+  margin: calc($root-size * 0.05);
 }
 
 .coordinateContainer {

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useGameState } from '../../../hooks/useGameState';
 
 import GameBoard from '../GameBoard';
 // import History from '../History';

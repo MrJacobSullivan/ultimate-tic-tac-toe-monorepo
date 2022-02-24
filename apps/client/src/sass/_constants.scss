@@ -1,7 +1,8 @@
 @import '../../../../node_modules/open-color/open-color.scss';
 
 // sizes
-$cell-size: 5rem;
+$root-size: 8rem;
+$cell-size: calc($root-size / 2);
 $mark-size: calc($cell-size * 0.9);
 
 // colors
