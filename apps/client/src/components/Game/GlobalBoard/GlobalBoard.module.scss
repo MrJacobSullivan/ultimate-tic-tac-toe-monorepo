@@ -11,23 +11,16 @@
 
 .horizontalCoordinateContainer {
   display: flex;
-  margin-top: calc($root-size / 12.5);
 }
 
 .verticalCoordinateContainer {
   display: flex;
   flex-direction: column;
-  margin-right: calc($root-size / 10);
-}
-
-.emptyCell {
-  height: $cell-size;
-  width: $cell-size;
+  margin-right: calc($root-size * 0.05);
 }
 
 .horizontalCoordinate {
   color: $color-lighter;
-  height: $cell-size;
   width: $cell-size;
   display: flex;
   justify-content: center;
@@ -36,7 +29,6 @@
 .verticalCoordinate {
   color: $color-lighter;
   height: $cell-size;
-  width: $cell-size;
   display: flex;
   justify-content: flex-end;
   align-items: center;

@@ -6,7 +6,7 @@ import { useGameState } from '../../..//hooks/useGameState';
 import styles from './GlobalSquare.module.scss';
 
 const GlobalSquare = ({ i }: { i: Coordinate }) => {
-  const { board, playable } = useGameState();
+  const { board, playable, winner } = useGameState();
 
   if (board[i].length === 1) {
     return (
@@ -16,7 +16,7 @@ const GlobalSquare = ({ i }: { i: Coordinate }) => {
     );
   }
 
-  if (playable === i || playable === null) {
+  if ((playable === i || playable === null) && !winner) {
     return (
       <div className={styles.globalSquare__playable}>
         <LocalBoard i={i} />

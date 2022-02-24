@@ -6,13 +6,14 @@ import styles from './LocalSquare.module.scss';
 import Mark from '../Mark';
 
 const LocalSquare = ({ i, j }: { i: Coordinate; j: Coordinate }) => {
-  const { board, playable } = useGameState();
+  const { board, playable, winner } = useGameState();
   const handlePlace = useHandlePlace();
 
-  const handleClick = () =>
+  const handleClick = () => {
     handlePlace({ i, j }, (success) => {
       console.log(success);
     });
+  };
 
   if (board[i][j]) {
     return (
@@ -22,7 +23,7 @@ const LocalSquare = ({ i, j }: { i: Coordinate; j: Coordinate }) => {
     );
   }
 
-  if (playable === i || playable === null) {
+  if ((playable === i || playable === null) && !winner) {
     return (
       <div className={styles.localSquare__playable} onClick={handleClick} />
     );
