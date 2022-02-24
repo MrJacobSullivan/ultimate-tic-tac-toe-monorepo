@@ -1,85 +1,49 @@
-import { Server, Socket } from 'socket.io';
+import { Server } from 'socket.io';
 import { nanoid } from 'nanoid';
-import { State, validateState, initialState } from 'engine';
+import { CoordinatePair } from 'engine';
+import { roomIdsToGameStates } from './db';
+import { createGame } from './controllers/createGame';
+import { joinGame } from './controllers/joinGame';
+import { disconnect } from './controllers/disconnect';
+import { placeMark } from './controllers/placeMark';
 
 const createSocket = ({ io }: { io: Server }) => {
-  console.log('sockets enabled');
+  const broadcastState = (roomId: string) => {
+    io.sockets.in(roomId).emit('stateUpdate', roomIdsToGameStates[roomId]);
+  };
 
-  const games: Record<
-    string,
-    {
-      state: State;
-      players: {
-        X: string | null;
-        O: string | null;
-      };
-    }
-  > = {};
-  const sockets: Record<string, Socket | undefined> = {};
+  io.sockets.on('connection', (socket) => {
+    const randomId = nanoid();
+    socket.emit('welcome', { clientId: randomId });
 
-  io.on('connection', (socket: Socket) => {
-    console.log(`User connected ${socket.id}`);
-    sockets[socket.id] = socket;
-
-    socket.on('disconnection', () => {
-      console.log(`User disconnected ${socket.id}`);
-      sockets[socket.id] = undefined;
-    });
-
-    socket.emit('games', games);
-
-    socket.on('create', () => {
-      const gameId = nanoid();
-      games[gameId] = {
-        state: initialState,
-        players: {
-          X: socket.id,
-          O: null
-        }
-      };
-
-      socket.join(gameId);
-
-      socket.broadcast.emit('games', games);
-      socket.emit('games', games);
-      socket.emit('joined', gameId);
-    });
-
-    socket.on('join', ({ gameId }) => {
-      const game = games[gameId];
-
-      socket.join(gameId);
-
-      if (game) {
-        games[gameId].players.O = socket.id;
-      } else {
-        games[gameId] = {
-          state: initialState,
-          players: {
-            X: socket.id,
-            O: null
-          }
-        };
-
-        socket.broadcast.emit('games', games);
-        socket.emit('games', games);
-      }
-
-      socket.emit('joined', gameId);
-    });
-
-    socket.on('place', ({ gameId, newState, id }) => {
-      const previousState = games[gameId].state;
-      const isValid = validateState({
-        previousState,
-        newState
+    socket.on('createGame', ({ clientId }: { clientId: string }) => {
+      createGame({ socket, clientId }, (roomId) => {
+        broadcastState(roomId);
       });
+    });
 
-      if (isValid) {
-        socket.to(gameId).emit('game move', { newState });
-      } else {
-        socket.to(socket.id).emit('rejected', { previousState });
+    socket.on(
+      'joinGame',
+      ({ roomId, clientId }: { roomId: string; clientId: string }) => {
+        joinGame({ socket, roomId, clientId }, (roomId) => {
+          broadcastState(roomId);
+        });
       }
+    );
+
+    socket.on(
+      'placeMark',
+      ({ newHistory }: { newHistory: CoordinatePair[] }) => {
+        placeMark({ socket, newHistory }, (roomId) => {
+          broadcastState(roomId);
+        });
+      }
+    );
+
+    socket.on('disconnecting', () => {
+      disconnect({ socket }, (roomId) => {
+        broadcastState(roomId);
+      });
     });
   });
 };

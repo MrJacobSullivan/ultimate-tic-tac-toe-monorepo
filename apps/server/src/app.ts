@@ -5,6 +5,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 
 import indexRouter from './routes';
+import roomsRouter from './routes/rooms';
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(cookieParser());
 app.use(cors());
 
 app.use('/', indexRouter);
+app.use('/rooms', roomsRouter);
 
 app.use((req, res, next) => {
   next(error(404));

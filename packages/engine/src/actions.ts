@@ -1,21 +1,26 @@
 import { initialState } from './lib/constants';
-import { CoordinatePair, State, History } from './types';
+import { CoordinatePair, State } from './types';
 import { determineGameState } from './lib/determineGameState';
 
-export const place = ({
-  state,
-  move
-}: {
-  state: State;
-  move: CoordinatePair;
-}): State => {
+export const place = (
+  {
+    state,
+    move
+  }: {
+    state: State;
+    move: CoordinatePair;
+  },
+  callback?: (success: boolean) => void
+): State => {
   const cachedState = { ...state };
   try {
     state = determineGameState({ state, move });
+    if (callback) callback(true);
   } catch ({ message }) {
     state = cachedState;
     if (typeof message === 'string') {
       state.error = message;
+      if (callback) callback(false);
     }
   }
   return state;
@@ -26,7 +31,7 @@ export const set = ({
   history
 }: {
   state: State;
-  history: History;
+  history: CoordinatePair[];
 }): State => {
   const cachedState = { ...state };
   state = initialState;

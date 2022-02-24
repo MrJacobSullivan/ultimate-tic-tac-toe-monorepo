@@ -9,7 +9,10 @@ const LocalSquare = ({ i, j }: { i: Coordinate; j: Coordinate }) => {
   const { board, playable } = useGameState();
   const handlePlace = useHandlePlace();
 
-  const handleClick = () => handlePlace({ i, j });
+  const handleClick = () =>
+    handlePlace({ i, j }, (success) => {
+      console.log(success);
+    });
 
   if (board[i][j]) {
     return (

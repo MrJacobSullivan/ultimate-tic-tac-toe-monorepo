@@ -1,4 +1,4 @@
-import { CoordinatePair, History } from 'engine';
+import { CoordinatePair } from 'engine';
 import { useApplicationContextReducer } from '../hooks/useApplicationContextReducer';
 
 export enum ApplicationReducerActions {
@@ -8,8 +8,12 @@ export enum ApplicationReducerActions {
 }
 
 export type ApplicationReducerActionType =
-  | { type: ApplicationReducerActions.PLACE; move: CoordinatePair }
-  | { type: ApplicationReducerActions.SET; history: History }
+  | {
+      type: ApplicationReducerActions.PLACE;
+      move: CoordinatePair;
+      callback?: (success: boolean) => void;
+    }
+  | { type: ApplicationReducerActions.SET; history: CoordinatePair[] }
   | { type: ApplicationReducerActions.RESET };
 
 export type ApplicationContextResult = ReturnType<

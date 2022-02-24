@@ -16,16 +16,17 @@ const GlobalBoard = () => {
     <div className={styles.globalBoard}>
       {range(16).map((i: number) => {
         if (i === 12) {
-          return <EmptyCell className={styles.emptyCell} />;
+          return <EmptyCell key={i} className={styles.emptyCell} />;
         }
 
         if (i >= 13) {
           return (
-            <div className={styles.horizontalCoordinateContainer}>
+            <div key={i} className={styles.horizontalCoordinateContainer}>
               {range(3).map((k: number) => {
                 const value = calcuateAlphaCoordinate({ i, k });
                 return (
                   <CoordinateCell
+                    key={k}
                     value={value as CoordinateCellValue}
                     className={styles.horizontalCoordinate}
                   />
@@ -37,11 +38,12 @@ const GlobalBoard = () => {
 
         if (i % 4 === 0) {
           return (
-            <div className={styles.verticalCoordinateContainer}>
+            <div key={i} className={styles.verticalCoordinateContainer}>
               {range(3).map((k: number) => {
                 const value = calculateNumericCoordinate({ i, k });
                 return (
                   <CoordinateCell
+                    key={k}
                     value={value as CoordinateCellValue}
                     className={styles.verticalCoordinate}
                   />
@@ -56,7 +58,7 @@ const GlobalBoard = () => {
           if (i <= 7) return i - 2;
           return i - 3;
         };
-        return <GlobalSquare key={value()} i={value() as Coordinate} />;
+        return <GlobalSquare key={i} i={value() as Coordinate} />;
       })}
     </div>
   );

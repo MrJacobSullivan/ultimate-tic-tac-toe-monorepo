@@ -19,8 +19,14 @@ export const useApplicationContextReducer = (
   state: State;
   socket?: Socket;
   setSocket: (socket: Socket) => void;
-  handlePlace: (move: CoordinatePair) => void;
-  handleSet: (history: CoordinatePair[]) => void;
+  handlePlace: (
+    move: CoordinatePair,
+    callback?: (success: boolean) => void
+  ) => void;
+  handleSet: (
+    history: CoordinatePair[],
+    callback?: (success: boolean) => void
+  ) => void;
   handleReset: () => void;
 } => {
   const [socket, setSocket] = React.useState<Socket>();
@@ -29,7 +35,7 @@ export const useApplicationContextReducer = (
     logger((state: State, action: ApplicationReducerActionType) => {
       switch (action.type) {
         case ApplicationReducerActions.PLACE:
-          return place({ state, move: action.move });
+          return place({ state, move: action.move }, action.callback);
         case ApplicationReducerActions.SET:
           return set({ state, history: action.history });
         case ApplicationReducerActions.RESET:
@@ -39,19 +45,23 @@ export const useApplicationContextReducer = (
     initialState
   );
 
-  const handlePlace = React.useCallback(async (move: CoordinatePair) => {
-    dispatch({
-      type: ApplicationReducerActions.PLACE,
-      move
-    });
+  const handlePlace = React.useCallback(
+    async (move: CoordinatePair, callback?: (success: boolean) => void) => {
+      dispatch({
+        type: ApplicationReducerActions.PLACE,
+        move,
+        callback
+      });
 
-    try {
-    } catch (err) {
-      console.log(err);
-    }
-  }, []);
+      try {
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    []
+  );
 
-  const handleSet = React.useCallback((history: CoordinatePair[]) => {
+  const handleSet = React.useCallback(async (history: CoordinatePair[]) => {
     dispatch({
       type: ApplicationReducerActions.SET,
       history
