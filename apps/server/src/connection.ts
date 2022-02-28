@@ -60,7 +60,7 @@ export default class Connection {
   joinGame(gameId: string) {
     try {
       if (!games[gameId]) {
-        this.createGame();
+        this.createGame(gameId);
       } else if (games[gameId].open) {
         this.socket.join(gameId);
         this.socket.broadcast
@@ -80,16 +80,16 @@ export default class Connection {
         this.broadcastOpenGames();
         this.logger(`${this.socket.id} has joined game ${gameId}`);
       } else {
-        throw new Error('[Socket Error]: Game is full.');
+        this.logger('[SOCKET ERROR] Game is full.');
       }
     } catch (err: any) {
       console.error(err);
     }
   }
 
-  createGame() {
+  createGame(potentialGameId?: string) {
     try {
-      const gameId = nanoid();
+      const gameId = potentialGameId || nanoid();
 
       this.socket.join(gameId);
       this.socket.broadcast

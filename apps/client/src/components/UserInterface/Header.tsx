@@ -5,18 +5,18 @@ import styles from './Header.module.scss';
 const Header = () => {
   return (
     <header className={styles.headerContainer}>
-      <Link to="/" className={styles.title}>
+      <Link to="/" className={styles.title} style={{ width: '100%' }}>
         Ultimate Tic-Tac-Toe
       </Link>
 
-      <nav className={styles.nav}>
+      {/* <nav className={styles.nav}>
         <Link to="/" className={styles.link}>
           Home
         </Link>
         <Link to="/play" className={styles.link}>
           Play
         </Link>
-      </nav>
+      </nav> */}
     </header>
   );
 };

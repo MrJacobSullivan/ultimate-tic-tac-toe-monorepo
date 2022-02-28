@@ -14,9 +14,9 @@ const Home = () => {
         <button onClick={() => navigate('/practice')} className={styles.button}>
           Practice
         </button>
-        <button onClick={() => navigate('/learn')} className={styles.button}>
+        {/* <button onClick={() => navigate('/learn')} className={styles.button}>
           Learn
-        </button>
+        </button> */}
       </div>
     </div>
   );

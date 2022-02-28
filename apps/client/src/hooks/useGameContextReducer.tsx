@@ -1,5 +1,4 @@
 import * as React from 'react';
-import logger from 'use-reducer-logger';
 import { initialState as defaultState, State } from 'engine';
 import {
   GameContextReducerActions,
@@ -24,10 +23,6 @@ export const useGameContextReducer = (
     },
     initialState
   );
-
-  React.useEffect(() => {
-    console.log(state);
-  }, [state]);
 
   const setState = React.useCallback((state: State) => {
     dispatch({ type: GameContextReducerActions.SET_STATE, state });

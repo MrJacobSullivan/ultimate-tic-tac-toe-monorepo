@@ -8,12 +8,12 @@ import Mark from '../Mark';
 
 const LocalSquare = ({ i, j }: { i: Coordinate; j: Coordinate }) => {
   const { board, playable, winner, history } = useGameState();
-  const [handleSend, error] = useSendMessage();
+  // const [handleSend, error] = useSendMessage();
   const handlePlace = useHandlePlace();
 
   const handleClick = () => {
     handlePlace(i, j);
-    handleSend(history.concat({ i, j }));
+    // handleSend(history.concat({ i, j }));
   };
 
   if (board[i][j]) {

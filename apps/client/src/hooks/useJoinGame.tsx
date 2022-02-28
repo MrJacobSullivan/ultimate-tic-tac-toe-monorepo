@@ -3,6 +3,7 @@ import { useSocket, useSocketEvent } from 'socket.io-react-hook';
 import { SOCKET_URL } from '../config';
 
 export const useJoinGame = () => {
+  const [joined, setJoined] = React.useState(false);
   const { socket, error } = useSocket(SOCKET_URL);
   const { sendMessage: joinGame } = useSocketEvent<{
     gameId: string;
@@ -11,9 +12,10 @@ export const useJoinGame = () => {
   const handleJoinGame = React.useCallback(
     (gameId: string) => {
       joinGame(gameId);
+      setJoined(true);
     },
     [joinGame]
   );
 
-  return [handleJoinGame, error];
+  return [handleJoinGame, joined, error];
 };
