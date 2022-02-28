@@ -17,6 +17,8 @@
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.2.1",
     "socket.io-client": "^4.4.1",
+    "socket.io-react-hook": "^1.0.15",
+    "swr": "^1.2.2",
     "use-reducer-logger": "^1.0.2"
   },
   "devDependencies": {

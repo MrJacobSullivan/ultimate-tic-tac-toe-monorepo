@@ -5,7 +5,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 
 import indexRouter from './routes';
-import roomsRouter from './routes/rooms';
+import gamesRouter from './routes/games';
 
 const app = express();
 
@@ -16,7 +16,7 @@ app.use(cookieParser());
 app.use(cors());
 
 app.use('/', indexRouter);
-app.use('/rooms', roomsRouter);
+app.use('/games', gamesRouter);
 
 app.use((req, res, next) => {
   next(error(404));
@@ -28,7 +28,7 @@ app.use(
     res.locals.error = req.app.get('env') === 'development' ? err : {};
 
     res.status(err.status || 500);
-    res.send('error');
+    res.send(err.message);
   }
 );
 

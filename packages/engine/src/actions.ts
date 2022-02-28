@@ -47,3 +47,14 @@ export const set = ({
   }
   return state;
 };
+
+export const validateStateChange = ({
+  previousState,
+  newState
+}: {
+  previousState: State;
+  newState: State;
+}) => {
+  // TODO
+  return true;
+};

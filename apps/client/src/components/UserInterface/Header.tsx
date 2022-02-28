@@ -1,16 +1,22 @@
 import * as React from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styles from './Header.module.scss';
 
 const Header = () => {
   return (
     <header className={styles.headerContainer}>
-      <h1 className={styles.title}>Ultimate Tic-Tac-Toe</h1>
+      <Link to="/" className={styles.title}>
+        Ultimate Tic-Tac-Toe
+      </Link>
 
-      {/* <nav className={styles.}>
-        <Link to="/">Home</Link>
-        <Link to="/play">Play</Link>
-      </nav> */}
+      <nav className={styles.nav}>
+        <Link to="/" className={styles.link}>
+          Home
+        </Link>
+        <Link to="/play" className={styles.link}>
+          Play
+        </Link>
+      </nav>
     </header>
   );
 };

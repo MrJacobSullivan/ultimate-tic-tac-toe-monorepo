@@ -1,23 +1,26 @@
 import * as React from 'react';
-
+import { initialState } from 'engine';
 import GameBoard from '../GameBoard';
 // import History from '../History';
 // import ChatContainer from '../../Chat/ChatContainer';
+import GameContextProvider from '../../../providers/GameContextProvider';
 
 import styles from './GameContainer.module.scss';
 
-const GameContainer = () => {
+const GameContainer = ({ socketsEnabled }: { socketsEnabled?: boolean }) => {
   return (
-    <div className={styles.gameContainer}>
-      <div className={styles.gameArea}>
-        <GameBoard />
+    <GameContextProvider initialState={initialState}>
+      <div className={styles.gameContainer}>
+        <div className={styles.gameArea}>
+          <GameBoard />
 
-        {/* <div className={styles.sidebar}>
+          {/* <div className={styles.sidebar}>
           <History />
           <ChatContainer />
         </div> */}
+        </div>
       </div>
-    </div>
+    </GameContextProvider>
   );
 };
 

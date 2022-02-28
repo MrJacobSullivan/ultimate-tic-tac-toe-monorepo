@@ -1,24 +1,16 @@
-import { CoordinatePair } from 'engine';
-import { useApplicationContextReducer } from '../hooks/useApplicationContextReducer';
+import { CoordinatePair, State } from 'engine';
+import { useGameContextReducer } from '../hooks/useGameContextReducer';
 
-export enum ApplicationReducerActions {
-  PLACE = 'place',
-  SET = 'set',
+export enum GameContextReducerActions {
+  SET_STATE = 'set_state',
   RESET = 'reset'
 }
 
-export type ApplicationReducerActionType =
-  | {
-      type: ApplicationReducerActions.PLACE;
-      move: CoordinatePair;
-      callback?: (success: boolean) => void;
-    }
-  | { type: ApplicationReducerActions.SET; history: CoordinatePair[] }
-  | { type: ApplicationReducerActions.RESET };
+export type GameContextReducerActionType =
+  | { type: GameContextReducerActions.SET_STATE; state: State }
+  | { type: GameContextReducerActions.RESET };
 
-export type ApplicationContextResult = ReturnType<
-  typeof useApplicationContextReducer
->;
+export type GameContextResult = ReturnType<typeof useGameContextReducer>;
 
 export type CoordinateCellValue =
   | 'a'

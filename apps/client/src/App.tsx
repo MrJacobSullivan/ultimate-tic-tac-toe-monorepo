@@ -6,15 +6,7 @@ import Header from './components/UserInterface/Header';
 import Main from './components/UserInterface/Main';
 import Footer from './components/UserInterface/Footer';
 
-import { useWebSocket } from './hooks/useWebSocket';
-
 const App = () => {
-  const { socket } = useWebSocket();
-
-  React.useEffect(() => {
-    if (socket) console.log(socket);
-  }, [socket]);
-
   return (
     <Page>
       <Header />

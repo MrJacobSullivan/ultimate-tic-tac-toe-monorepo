@@ -1,12 +1,32 @@
+@import '../../sass/global.scss';
+
 .headerContainer {
   display: flex;
   height: 10vh;
   align-items: center;
-  width: 100%;
+  justify-content: space-between;
+  width: 60%;
 }
 
 .title {
   font-size: 2rem;
   text-align: center;
-  width: 100%;
+  transition: color;
+  transition-duration: 1ms;
+  &:hover {
+    color: $color-lighter;
+  }
+}
+
+.nav {
+  width: min-content;
+}
+
+.link {
+  margin-left: 2rem;
+  transition: color 0.5s ease;
+
+  &:hover {
+    color: $color-lighter;
+  }
 }

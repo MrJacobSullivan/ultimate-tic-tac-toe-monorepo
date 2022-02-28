@@ -1,17 +1,23 @@
 import * as React from 'react';
-// import { useNavigate } from 'react-router-dom';
-import GameContainer from '../components/Game/GameContainer';
+import { useNavigate } from 'react-router-dom';
 import styles from './Home.module.scss';
 
 const Home = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <div className={styles.home}>
-      <GameContainer />
-      {/* <button onClick={() => navigate('/play')}>Play</button>
-      <button onClick={() => navigate('/practice')}>Practice</button>
-      <button onClick={() => navigate('/learn')}>Learn</button> */}
+      <div className={styles.container}>
+        <button onClick={() => navigate('/play')} className={styles.button}>
+          Play
+        </button>
+        <button onClick={() => navigate('/practice')} className={styles.button}>
+          Practice
+        </button>
+        <button onClick={() => navigate('/learn')} className={styles.button}>
+          Learn
+        </button>
+      </div>
     </div>
   );
 };

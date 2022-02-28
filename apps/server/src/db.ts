@@ -1,17 +1,21 @@
 import { State } from 'engine';
+import { Message, Player, Players } from './types/data';
 
 // TODO: store these values in Redis
 
-export const socketIdToClientIds: Record<string, string> = {};
-export const clientIdsToRoomIds: Record<string, string> = {};
-export const roomIdsToGameStates: Record<
+export const adminUser: Player = {
+  id: 'admin',
+  games: ['*']
+};
+
+export const players: Record<string, Player> = {};
+
+export const games: Record<
   string,
   {
+    open: boolean;
     state: State;
-    players: {
-      X: string | null;
-      O: string | null;
-    };
-    active: boolean;
+    players: Players;
+    messages: Message;
   }
 > = {};

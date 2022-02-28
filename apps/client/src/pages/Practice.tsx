@@ -1,11 +1,8 @@
 import * as React from 'react';
+import GameContainer from '../components/Game/GameContainer';
 
 const Practice = () => {
-  return (
-    <div>
-      <p>Practice</p>
-    </div>
-  );
+  return <GameContainer />;
 };
 
 export default Practice;

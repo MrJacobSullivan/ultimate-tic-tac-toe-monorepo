@@ -21,6 +21,7 @@
     "http-errors": "^2.0.0",
     "morgan": "^1.10.0",
     "nanoid": "^3.3.0",
+    "socket-events": "*",
     "socket.io": "^4.4.1"
   },
   "devDependencies": {

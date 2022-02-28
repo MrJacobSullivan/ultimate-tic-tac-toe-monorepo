@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Coordinate } from 'engine';
-import { ApplicationContext } from '../contexts/ApplicationContext';
+import { GameContext } from '../contexts/GameContext';
 
 export const useGameState = () => {
   const [playable, setPlayable] = React.useState<null | Coordinate>(null);
-  const { state } = React.useContext(ApplicationContext);
+  const { state } = React.useContext(GameContext);
 
   React.useEffect(() => {
     if (state.recent !== null) {

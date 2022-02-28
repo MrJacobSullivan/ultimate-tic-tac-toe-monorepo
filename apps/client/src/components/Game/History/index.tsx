@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useGameState } from '../../../hooks/useGameState';
-import { useHandleSet } from '../../../hooks/useHandleSet';
-import { useHandleReset } from '../../../hooks/useHandleReset';
+import { useResetGame } from '../../../hooks/useResetGame';
 import { calculateAlphanumericCoordinate } from '../../../utils';
 import styles from './History.module.scss';
 
@@ -9,18 +8,17 @@ import Mark from '../Mark';
 
 const History = () => {
   const { history, winner } = useGameState();
-  const handleSet = useHandleSet();
-  const handleReset = useHandleReset();
+  const handleResetGame = useResetGame();
 
   if (!history) return null;
 
-  const handleSetToMove = (number: number) => {
-    handleSet(history.slice(0, number + 1));
-  };
+  // const handleSetToMove = (number: number) => {
+  //   handleSet(history.slice(0, number + 1));
+  // };
 
   return (
     <div className={styles.historyContainer}>
-      {history.map((move, number) => {
+      {/* {history.map((move, number) => {
         const { x, y } = calculateAlphanumericCoordinate(move);
         return (
           <div
@@ -49,7 +47,7 @@ const History = () => {
         <div className={styles.winnerContainer} onClick={() => handleReset()}>
           <p className={styles.winner}>{winner} is the Winner!</p>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

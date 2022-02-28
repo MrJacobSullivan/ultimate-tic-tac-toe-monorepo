@@ -2,17 +2,18 @@ import * as React from 'react';
 import { Coordinate, Mark as EngineMark } from 'engine';
 import { useGameState } from '../../../hooks/useGameState';
 import { useHandlePlace } from '../../../hooks/useHandlePlace';
+import { useSendMessage } from '../../../hooks/useSendMessage';
 import styles from './LocalSquare.module.scss';
 import Mark from '../Mark';
 
 const LocalSquare = ({ i, j }: { i: Coordinate; j: Coordinate }) => {
-  const { board, playable, winner } = useGameState();
+  const { board, playable, winner, history } = useGameState();
+  const [handleSend, error] = useSendMessage();
   const handlePlace = useHandlePlace();
 
   const handleClick = () => {
-    handlePlace({ i, j }, (success) => {
-      console.log(success);
-    });
+    handlePlace(i, j);
+    handleSend(history.concat({ i, j }));
   };
 
   if (board[i][j]) {
