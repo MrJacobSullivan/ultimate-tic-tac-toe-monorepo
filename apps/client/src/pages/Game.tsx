@@ -5,11 +5,11 @@ import GameContainer from '../components/Game/GameContainer';
 
 const Room = () => {
   const { gameId } = useParams();
-  const [joinGame, joined, error] = useJoinGame();
+  const [joinGame, error] = useJoinGame();
 
   React.useEffect(() => {
-    if (!joined && gameId) joinGame(gameId);
-  }, [gameId, joined, joinGame]);
+    if (gameId) joinGame(gameId);
+  }, [gameId, joinGame]);
 
   return (
     <div>

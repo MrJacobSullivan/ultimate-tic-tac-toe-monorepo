@@ -16,8 +16,7 @@ export interface ClientToServerEvents {
     callback?: (error: string) => void
   ) => void;
   'chat:messages': (gameId: string) => void;
-  'game:join': (gameId: string) => void;
-  'game:create': () => void;
+  'game:join': (gameId?: string) => void;
   'game:move': (
     gameId: string,
     previousState: State,

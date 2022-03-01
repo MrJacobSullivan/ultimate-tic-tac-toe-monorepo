@@ -34,7 +34,6 @@ export default class Connection {
 
     this.broadcastOpenGames();
 
-    socket.on('game:create', () => this.createGame());
     socket.on('game:join', (gameId) => this.joinGame(gameId));
     socket.on('game:move', (gameId, previousState, newState) =>
       this.handleMove(gameId, previousState, newState)
@@ -57,10 +56,37 @@ export default class Connection {
     this.logger('broadcasting open games...');
   }
 
-  joinGame(gameId: string) {
+  joinGame(gameId?: string) {
     try {
-      if (!games[gameId]) {
-        this.createGame(gameId);
+      if (!gameId || !games[gameId]) {
+        if (!gameId) gameId = nanoid();
+
+        this.socket.join(gameId);
+        this.socket.broadcast
+          .to(gameId)
+          .emit(
+            'chat:message',
+            this.constructMessage(
+              `${this.socket.id} has joined the game.`,
+              true
+            )
+          );
+
+        players[this.socket.id].games.push(gameId);
+        games[gameId] = {
+          open: true,
+          state: initialState,
+          players: {
+            X: this.socket.id,
+            O: null
+          },
+          messages: new Set()
+        };
+
+        this.socket.emit('game:created', gameId);
+        this.broadcastOpenGames();
+        this.logger(`Created a room at ${gameId}`);
+        this.logger(`${this.socket.id} has joined room ${gameId}`);
       } else if (games[gameId].open) {
         this.socket.join(gameId);
         this.socket.broadcast
@@ -82,38 +108,6 @@ export default class Connection {
       } else {
         this.logger('[SOCKET ERROR] Game is full.');
       }
-    } catch (err: any) {
-      console.error(err);
-    }
-  }
-
-  createGame(potentialGameId?: string) {
-    try {
-      const gameId = potentialGameId || nanoid();
-
-      this.socket.join(gameId);
-      this.socket.broadcast
-        .to(gameId)
-        .emit(
-          'chat:message',
-          this.constructMessage(`${this.socket.id} has joined the game.`, true)
-        );
-
-      players[this.socket.id].games.push(gameId);
-      games[gameId] = {
-        open: true,
-        state: initialState,
-        players: {
-          X: this.socket.id,
-          O: null
-        },
-        messages: new Set()
-      };
-
-      this.socket.emit('game:created', gameId);
-      this.broadcastOpenGames();
-      this.logger(`Created a room at ${gameId}`);
-      this.logger(`${this.socket.id} has joined room ${gameId}`);
     } catch (err: any) {
       console.error(err);
     }

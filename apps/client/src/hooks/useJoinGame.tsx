@@ -10,7 +10,7 @@ export const useJoinGame = () => {
   }>(socket, 'game:join');
 
   const handleJoinGame = React.useCallback(
-    (gameId: string) => {
+    (gameId?: string) => {
       joinGame(gameId);
       setJoined(true);
     },
