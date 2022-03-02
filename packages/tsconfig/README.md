@@ -1,3 +1,0 @@
-# tsconfig
-
-**Work In Progress**
