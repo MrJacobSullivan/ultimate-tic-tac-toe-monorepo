@@ -5,11 +5,7 @@ module.exports = {
   },
   transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
-  projects: [
-    '<rootDir>/packages/*',
-    '<rootDir>/playground/*',
-    '<rootDir>/apps/*'
-  ],
+  projects: ['<rootDir>/packages/*', '<rootDir>/apps/*'],
   coverageDirectory: '<rootDir>/coverage/',
   collectCoverageFrom: ['<rootDir>/packages/*/src/**/*.{ts,tsx}'],
   testURL: 'http://localhost/',

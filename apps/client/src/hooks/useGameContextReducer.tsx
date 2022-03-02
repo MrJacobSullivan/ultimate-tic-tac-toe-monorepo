@@ -3,7 +3,7 @@ import { initialState as defaultState, State } from 'engine';
 import {
   GameContextReducerActions,
   GameContextReducerActionType
-} from '../types';
+} from '../types/context';
 
 export const useGameContextReducer = (
   initialState: State

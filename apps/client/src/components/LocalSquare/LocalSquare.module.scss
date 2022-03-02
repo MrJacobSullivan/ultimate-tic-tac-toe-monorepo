@@ -1,0 +1,20 @@
+@import '../../sass/global.scss';
+
+.localSquare {
+  @extend %square;
+  align-items: center;
+  border: calc($root-size * 0.0175) solid $border-local;
+  cursor: default;
+  display: flex;
+  height: $cell-size;
+  justify-content: center;
+  width: $cell-size;
+}
+
+.localSquare__playable {
+  @extend .localSquare;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

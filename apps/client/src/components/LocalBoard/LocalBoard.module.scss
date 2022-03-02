@@ -1,0 +1,28 @@
+@import '../../sass/global.scss';
+
+.localBoard {
+  align-content: center;
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: center;
+  justify-items: center;
+
+  height: $cell-size * 3;
+  width: $cell-size * 3;
+
+  margin: calc($root-size * 0.05);
+}
+
+.coordinateContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.veritcalCoordinate {
+  color: $color;
+  height: $cell-size;
+  width: $cell-size;
+  display: flex;
+  justify-content: center;
+}

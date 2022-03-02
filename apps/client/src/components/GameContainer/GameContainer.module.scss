@@ -1,0 +1,24 @@
+@import '../../sass/global.scss';
+
+.gameContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: min-content;
+}
+
+.gameArea {
+  display: flex;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+}
+
+.turn {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}

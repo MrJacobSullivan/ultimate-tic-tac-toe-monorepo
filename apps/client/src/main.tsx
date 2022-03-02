@@ -1,35 +1,32 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { IoProvider as SocketProvider } from 'socket.io-react-hook';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate
+} from 'react-router-dom';
+import { initialState } from 'engine';
 
 import App from './App';
+import GameContainer from './components/GameContainer';
+import GameContextProvider from './providers/GameContextProvider';
+
 import 'preflight';
 import './sass/global.scss';
 
-import Home from './pages/Home';
-import Play from './pages/Play';
-import Game from './pages/Game';
-import Practice from './pages/Practice';
-import Learn from './pages/Learn';
-import NotFound from './pages/NotFound';
-
 ReactDOM.render(
   <React.StrictMode>
-    <SocketProvider>
+    <GameContextProvider initialState={initialState}>
       <Router>
         <Routes>
           <Route path="/" element={<App />}>
-            <Route index element={<Home />} />
-            <Route path="play" element={<Play />} />
-            <Route path="/play/:gameId" element={<Game />} />
-            <Route path="/practice" element={<Practice />} />
-            <Route path="learn" element={<Learn />} />
+            <Route index element={<GameContainer />} />
+            <Route path="*" element={<Navigate replace to="/" />} />
           </Route>
-          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
-    </SocketProvider>
+    </GameContextProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

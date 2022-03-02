@@ -1,0 +1,35 @@
+@import '../../sass/global.scss';
+
+.globalBoard {
+  align-content: center;
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  justify-content: center;
+  justify-items: center;
+}
+
+.horizontalCoordinateContainer {
+  display: flex;
+}
+
+.verticalCoordinateContainer {
+  display: flex;
+  flex-direction: column;
+  margin-right: calc($root-size * 0.05);
+}
+
+.horizontalCoordinate {
+  color: $color-lighter;
+  width: $cell-size;
+  display: flex;
+  justify-content: center;
+}
+
+.verticalCoordinate {
+  color: $color-lighter;
+  height: $cell-size;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}

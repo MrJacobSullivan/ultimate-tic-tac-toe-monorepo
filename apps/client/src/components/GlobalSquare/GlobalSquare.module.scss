@@ -1,0 +1,16 @@
+@import '../../sass/global.scss';
+
+.globalSquare {
+  @extend %global-square;
+  border: calc($root-size * 0.02) solid $border-global;
+}
+
+.globalSquare__playable {
+  @extend .globalSquare;
+  background: $current;
+}
+
+.globalSquare__potential {
+  @extend .globalSquare;
+  background: $potential;
+}

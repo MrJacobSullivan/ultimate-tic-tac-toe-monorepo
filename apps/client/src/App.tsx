@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Outlet } from 'react-router-dom';
 
-import Page from './components/UserInterface/Page';
-import Header from './components/UserInterface/Header';
-import Main from './components/UserInterface/Main';
-import Footer from './components/UserInterface/Footer';
+import Page from './components/Page';
+import Header from './components/Header';
+import Main from './components/Main';
+import Footer from './components/Footer';
 
 const App = () => {
   return (
