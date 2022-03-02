@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Coordinate } from 'engine';
 import LocalSquare from '../LocalSquare';
-import { range } from '../../utils';
+import { range } from '../../utils/range';
 import styles from './LocalBoard.module.scss';
 
 const LocalBoard = ({ i }: { i: Coordinate }) => {

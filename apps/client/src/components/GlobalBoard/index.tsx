@@ -3,11 +3,11 @@ import { Coordinate } from 'engine';
 import GlobalSquare from '../GlobalSquare';
 import CoordinateCell from '../Cells/CoordinateCell';
 import EmptyCell from '../Cells/EmptyCell';
+import { range } from '../../utils/range';
 import {
-  range,
   calcuateAlphaCoordinate,
   calculateNumericCoordinate
-} from '../../utils';
+} from '../../utils/coordinate';
 import type { CoordinateCellValue } from '../Cells/CoordinateCellValue';
 import styles from './GlobalBoard.module.scss';
 

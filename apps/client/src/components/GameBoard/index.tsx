@@ -4,7 +4,7 @@ import styles from './GameBoard.module.scss';
 
 const GameBoard = () => {
   return (
-    <div className={styles.gameBoard}>
+    <div className={styles.gameBoard} data-testid="gameBoard">
       <GlobalBoard />
     </div>
   );
